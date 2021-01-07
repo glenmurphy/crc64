@@ -1,0 +1,1 @@
+A JavaScript implementation of CRC-64-ECMA; relies on BigInt support
