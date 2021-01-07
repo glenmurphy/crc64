@@ -1,3 +1,5 @@
+// https://github.com/glenmurphy/crc64
+
 var CRC64_ECMA182_POLY = 0x42F0E1EBA9EA3693n;
 var crc64_table = [];
 var mask = 0xFFFFFFFFFFFFFFFFn;
