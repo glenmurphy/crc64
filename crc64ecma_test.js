@@ -1,7 +1,7 @@
 import { crc64ecma } from './crc64ecma.js';
 
 function expect(b) {
-  var line = (new Error).stack.split("\n")[2].split(":")[2];
+  var line = (new Error).stack.split("\n")[2].split("test.js")[1].split(":")[1];
   console.log(`${line}: ${b ? '\u001b[32mPASS' : '\u001b[31mFAIL'}\u001b[0m`);
 }
 
