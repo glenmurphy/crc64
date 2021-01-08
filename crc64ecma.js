@@ -5,8 +5,7 @@ var mask8 = 0xFFFFFFFFFFFFFFFFn;
 function generateTable() {
   if (crc64_table.length) return;
 
-  var c = 0n;
-  var crc = 0n;
+  var c = 0n, crc = 0n;
 
   for (var i = 0n; i < 256n; i++) {
     crc = 0n;
@@ -14,7 +13,7 @@ function generateTable() {
 
     for (var j = 0; j < 8; j++) {
       if ((crc ^ c) & 0x8000000000000000n)
-        crc = (crc << 1n) ^ 0x42F0E1EBA9EA3693n;
+        crc = (crc << 1n) ^ 0x42F0E1EBA9EA3693n; // ECMA182 Polynomial
       else
         crc <<= 1n;
       c <<= 1n;
@@ -30,8 +29,8 @@ export function crc64ecma(str) {
   
   var crc = 0n;
   for (var i = 0; i < str.length; i++) {
-    var byte = BigInt(str.charCodeAt(i));
-    var byte56 = ((byte > 255) ? 0n : byte) << 56n;
+    var byte = BigInt(str.charCodeAt(i) & 0xFF);
+    var byte56 = byte << 56n;
     crc = (crc ^ byte56);
     var index = (crc >> 56n) & 0xFFn;
     crc = ((crc << 8n) ^ crc64_table[index]) & mask8;
