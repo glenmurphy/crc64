@@ -29,9 +29,8 @@ export function crc64ecma(str) {
   
   var crc = 0n;
   for (var i = 0; i < str.length; i++) {
-    var byte = BigInt(str.charCodeAt(i) & 0xFF);
-    var byte56 = byte << 56n;
-    crc = (crc ^ byte56);
+    var byte56 = BigInt(str.charCodeAt(i) & 0xFF) << 56n;
+    crc ^= byte56;
     var index = (crc >> 56n) & 0xFFn;
     crc = ((crc << 8n) ^ crc64_table[index]) & mask8;
   }
